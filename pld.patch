@@ -1,0 +1,11 @@
+--- firehol-1.273/firehol.sh.orig	2008-07-31 04:23:40.000000000 +0300
++++ firehol-1.273/firehol.sh	2009-09-22 16:38:37.115801635 +0300
+@@ -2,7 +2,7 @@
+ #
+ # Startup script to implement /etc/firehol/firehol.conf pre-defined rules.
+ #
+-# chkconfig: 2345 99 92
++# chkconfig: 2345 20 80
+ #
+ # description: creates stateful iptables packet filtering firewalls.
+ #
