@@ -4,15 +4,16 @@
 # - recheck deps
 Summary:	Simple and powerful firewall and traffic shaping languages
 Name:		firehol
-Version:	2.0.1
+Version:	3.0.1
 Release:	0.1
 License:	GPL v2+
 Group:		Applications/Networking
-Source0:	http://firehol.org/download/firehol/releases/v%{version}/%{name}-%{version}.tar.xz
-# Source0-md5:	e2672c82b2b6012f9000c15c08c7dc89
+Source0:	https://firehol.org/download/firehol/releases/v%{version}/%{name}-%{version}.tar.xz
+# Source0-md5:	afee409b698ad0707340112ff0e811b2
 Source1:	%{name}.service
 Source2:	fireqos.service
-URL:		http://firehol.org
+URL:		https://firehol.org/
+BuildRequires:	haproxy
 BuildRequires:	hostname
 BuildRequires:	iproute2
 BuildRequires:	iptables
