@@ -2,6 +2,9 @@
 # - pldize initscript
 # - unbash initscript
 # - recheck deps
+# - update configure not to require tools at build time
+# - checking whether /usr/sbin/iprange version is 1.0.2 or newer... no
+#   configure: error: could not find required version of iprange - check http://firehol.org/download/iprange/
 Summary:	Simple and powerful firewall and traffic shaping languages
 Name:		firehol
 Version:	3.0.1
@@ -13,7 +16,6 @@ Source0:	https://firehol.org/download/firehol/releases/v%{version}/%{name}-%{ver
 Source1:	%{name}.service
 Source2:	fireqos.service
 URL:		https://firehol.org/
-BuildRequires:	haproxy
 BuildRequires:	hostname
 BuildRequires:	iproute2
 BuildRequires:	iptables
@@ -31,6 +33,7 @@ Requires:	iproute2 >= 2.2.4
 Requires:	iptables >= 1.2.4
 Requires:	kmod
 Requires:	less
+Requires:	ipset
 Requires:	procps
 Requires:	rc-scripts
 Requires:	sed
@@ -57,7 +60,8 @@ interfaces.
 %setup -q
 
 %build
-%configure
+%configure \
+	TRACEROUTE=/usr/sbin/traceroute
 %{__make}
 
 %install
