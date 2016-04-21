@@ -141,9 +141,9 @@ rm -rf $RPM_BUILD_ROOT
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
-# Hack for documentation without crufts.
-rm -frv $RPM_BUILD_ROOT%{_docdir}
-find examples/ -name "Makefile*" -delete -print
+install -d $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}
+cp -a examples/* $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}
+find $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version} -name "Makefile*" -delete -print
 
 # Install systemd units.
 install -d $RPM_BUILD_ROOT%{systemdunitdir}
@@ -179,7 +179,7 @@ fi
 
 %files
 %defattr(644,root,root,755)
-%doc README THANKS examples
+%doc README THANKS
 %doc doc/firehol/firehol-manual.{pdf,html}
 %doc doc/fireqos/fireqos-manual.{pdf,html}
 %dir %{_sysconfdir}/firehol
@@ -196,8 +196,11 @@ fi
 %dir %{_libdir}/firehol
 %{_libdir}/firehol/functions.common.sh
 %{_datadir}/update-ipsets
-%{_mandir}/man1/*.1*
-%{_mandir}/man5/*.5*
+%{_mandir}/man1/vnetbuild.1*
+%{_mandir}/man5/firehol*.5*
+%{_mandir}/man5/fireqos*.5*
+%{_mandir}/man5/vnetbuild*.5*
+%{_examplesdir}/%{name}-%{version}
 %{systemdunitdir}/firehol.service
 %{systemdunitdir}/fireqos.service
 %{_localstatedir}/spool/%{name}
