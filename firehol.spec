@@ -6,7 +6,7 @@
 Summary:	Simple and powerful firewall and traffic shaping languages
 Name:		firehol
 Version:	3.0.1
-Release:	0.1
+Release:	0.2
 License:	GPL v2+
 Group:		Applications/Networking
 Source0:	https://firehol.org/download/firehol/releases/v%{version}/%{name}-%{version}.tar.xz
@@ -53,6 +53,13 @@ You can run FireHOL with the 'helpme' argument, to get a configuration
 file for the system run, which you can modify according to your needs.
 The default configuration file will allow only client traffic on all
 interfaces.
+
+%package doc
+Summary:	Documentation for firehol
+Group:		Documentation
+
+%description doc
+Documentation for firehol.
 
 %prep
 %setup -q
@@ -139,9 +146,13 @@ interfaces.
 %install
 rm -rf $RPM_BUILD_ROOT
 %{__make} install \
+	INSTALL="install -p" \
 	contribdir=%{_examplesdir}/%{name}-%{version}/contrib \
 	examplesdir=%{_examplesdir}/%{name}-%{version} \
+	htmldir=%{_docdir}/%{name}-doc-%{version} \
+	pdfdir=%{_docdir}/%{name}-doc-%{version} \
 	DESTDIR=$RPM_BUILD_ROOT
+
 
 # Install systemd units.
 install -d $RPM_BUILD_ROOT%{systemdunitdir}
@@ -178,8 +189,6 @@ fi
 %files
 %defattr(644,root,root,755)
 %doc README THANKS
-%doc doc/firehol/firehol-manual.{pdf,html}
-%doc doc/fireqos/fireqos-manual.{pdf,html}
 %dir %{_sysconfdir}/firehol
 %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/%{name}/firehol.conf
 %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/%{name}/fireqos.conf
@@ -200,7 +209,11 @@ fi
 %{_mandir}/man5/firehol*.5*
 %{_mandir}/man5/fireqos*.5*
 %{_mandir}/man5/vnetbuild*.5*
-%{_examplesdir}/%{name}-%{version}
 %{systemdunitdir}/firehol.service
 %{systemdunitdir}/fireqos.service
 %{_localstatedir}/spool/%{name}
+
+%files doc
+%defattr(644,root,root,755)
+%doc %{_docdir}/%{name}-doc-%{version}
+%{_examplesdir}/%{name}-%{version}
