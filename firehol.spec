@@ -38,6 +38,8 @@ Requires:	util-linux >= 2.11
 BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
+%define		_libdir	%{_prefix}/lib
+
 %description
 FireHOL is a generic firewall generator, meaning that you can design
 any kind of local or routing stateful packet filtering firewalls with
