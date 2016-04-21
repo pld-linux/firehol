@@ -58,6 +58,9 @@ interfaces.
 %build
 # grep -E 'AX_NEED_PROG|AX_CHECK_PROG' configure.ac |sort -u|sed -rne 's/.+\(\[([^]]+)\], \[([^]]+)\].+/echo \1=`PATH=$PATH:\/usr\/sbin which \2` \\\\/p'|sh
 %configure \
+	FIREHOL_AUTOSAVE=/etc/sysconfig/iptables \
+	FIREHOL_AUTOSAVE6=/etc/sysconfig/ip6tables \
+	\
 	BASH_SHELL_PATH=/bin/bash \
 	BRIDGE=/sbin/bridge \
 	CAT=/bin/cat \
@@ -185,6 +188,12 @@ fi
 %{_sysconfdir}/%{name}/services/*.example
 %attr(755,root,root) %{_sbindir}/firehol
 %attr(755,root,root) %{_sbindir}/fireqos
+%attr(755,root,root) %{_sbindir}/link-balancer
+%attr(755,root,root) %{_sbindir}/update-ipsets
+%attr(755,root,root) %{_sbindir}/vnetbuild
+%dir %{_libdir}/firehol
+%{_libdir}/firehol/functions.common.sh
+%{_datadir}/update-ipsets
 %{_mandir}/man1/*.1*
 %{_mandir}/man5/*.5*
 %{systemdunitdir}/firehol.service
