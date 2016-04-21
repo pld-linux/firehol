@@ -3,8 +3,6 @@
 # - unbash initscript
 # - recheck deps
 # - update configure not to require tools at build time
-# - checking whether /usr/sbin/iprange version is 1.0.2 or newer... no
-#   configure: error: could not find required version of iprange - check http://firehol.org/download/iprange/
 Summary:	Simple and powerful firewall and traffic shaping languages
 Name:		firehol
 Version:	3.0.1
@@ -16,12 +14,18 @@ Source0:	https://firehol.org/download/firehol/releases/v%{version}/%{name}-%{ver
 Source1:	%{name}.service
 Source2:	fireqos.service
 URL:		https://firehol.org/
+BuildRequires:	graphviz
 BuildRequires:	hostname
+BuildRequires:	iprange >= 1.0.2
 BuildRequires:	iproute2
 BuildRequires:	iptables
 BuildRequires:	procps
+BuildRequires:	screen
 BuildRequires:	systemd-devel
 BuildRequires:	tar >= 1:1.22
+BuildRequires:	unzip
+BuildRequires:	wget
+BuildRequires:	whois
 BuildRequires:	xz
 Requires(post,preun):	/sbin/chkconfig
 Requires:	coreutils
@@ -30,10 +34,10 @@ Requires:	grep >= 2.4.2
 Requires:	gzip
 Requires:	hostname
 Requires:	iproute2 >= 2.2.4
+Requires:	ipset
 Requires:	iptables >= 1.2.4
 Requires:	kmod
 Requires:	less
-Requires:	ipset
 Requires:	procps
 Requires:	rc-scripts
 Requires:	sed
@@ -81,7 +85,7 @@ interfaces.
 	GAWK=/bin/awk \
 	HEAD=/usr/bin/head \
 	IP=/sbin/ip \
-	IPRANGE=/usr/sbin/iprange \
+	IPRANGE=/usr/bin/iprange \
 	IPSET=/usr/sbin/ipset \
 	LN=/bin/ln \
 	LOGGER=/usr/bin/logger \
@@ -158,7 +162,7 @@ fi
 
 %files
 %defattr(644,root,root,755)
-%doc AUTHORS NEWS README THANKS examples
+%doc README THANKS examples
 %doc doc/firehol/firehol-manual.{pdf,html}
 %doc doc/fireqos/fireqos-manual.{pdf,html}
 %dir %{_sysconfdir}/firehol
