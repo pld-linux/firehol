@@ -139,11 +139,9 @@ interfaces.
 %install
 rm -rf $RPM_BUILD_ROOT
 %{__make} install \
+	contribdir=%{_examplesdir}/%{name}-%{version}/contrib \
+	examplesdir=%{_examplesdir}/%{name}-%{version} \
 	DESTDIR=$RPM_BUILD_ROOT
-
-install -d $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}
-cp -a examples/* $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}
-find $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version} -name "Makefile*" -delete -print
 
 # Install systemd units.
 install -d $RPM_BUILD_ROOT%{systemdunitdir}
@@ -196,6 +194,8 @@ fi
 %dir %{_libdir}/firehol
 %{_libdir}/firehol/functions.common.sh
 %{_datadir}/update-ipsets
+%{_mandir}/man1/firehol.1*
+%{_mandir}/man1/fireqos.1*
 %{_mandir}/man1/vnetbuild.1*
 %{_mandir}/man5/firehol*.5*
 %{_mandir}/man5/fireqos*.5*
