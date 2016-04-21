@@ -64,7 +64,7 @@ interfaces.
 %setup -q
 
 %build
-# grep AX_NEED_PROG configure.ac |sort -u|sed -rne 's/.+\(\[([^]]+)\], \[([^]]+)\].+/echo \1=`which \2` \\\\/p'|sh
+# grep -E 'AX_NEED_PROG|AX_CHECK_PROG' configure.ac |sort -u|sed -rne 's/.+\(\[([^]]+)\], \[([^]]+)\].+/echo \1=`PATH=$PATH:\/usr\/sbin which \2` \\\\/p'|sh
 %configure \
 	BASH_SHELL_PATH=/bin/bash \
 	BRIDGE=/sbin/bridge \
@@ -82,11 +82,20 @@ interfaces.
 	FIND=/usr/bin/find \
 	FLOCK=/usr/bin/flock \
 	FOLD=/usr/bin/fold \
-	GAWK=/bin/awk \
+	FUNZIP=/usr/bin/funzip \
+	GAWK=/usr/bin/gawk \
+	GIT=/usr/bin/git \
 	HEAD=/usr/bin/head \
+	HOSTNAMECMD=/bin/hostname \
+	IP6TABLES=/usr/sbin/ip6tables \
+	IP6TABLES_RESTORE=/usr/sbin/ip6tables-restore \
+	IP6TABLES_SAVE=/usr/sbin/ip6tables-save \
 	IP=/sbin/ip \
 	IPRANGE=/usr/bin/iprange \
 	IPSET=/usr/sbin/ipset \
+	IPTABLES=/usr/sbin/iptables \
+	IPTABLES_RESTORE=/usr/sbin/iptables-restore \
+	IPTABLES_SAVE=/usr/sbin/iptables-save \
 	LN=/bin/ln \
 	LOGGER=/usr/bin/logger \
 	LS=/bin/ls \
@@ -94,27 +103,38 @@ interfaces.
 	MKDIR=/bin/mkdir \
 	MKTEMP=/bin/mktemp \
 	MODPROBE=/sbin/insmod \
-	MORE=/bin/cat \
+	MODPROBE=/sbin/modprobe \
+	MORE=/bin/more \
 	MV=/bin/mv \
+	NEATO=/usr/bin/neato \
 	PING6=/usr/bin/ping6 \
 	PING=/usr/bin/ping \
+	RENICE=/usr/bin/renice \
 	RM=/bin/rm \
 	RMMOD=/sbin/rmmod \
+	SCREEN=/usr/bin/screen \
 	SEQ=/usr/bin/seq \
-	SH=/bin/ksh \
+	SH=/bin/sh \
 	SLEEP=/bin/sleep \
 	SORT=/bin/sort \
+	SS=/sbin/ss \
+	STTY=/bin/stty \
 	SYSCTL=/sbin/sysctl \
 	TAIL=/usr/bin/tail \
 	TAR=/bin/tar \
 	TC=/sbin/tc \
+	TCPDUMP=/usr/sbin/tcpdump \
 	TOUCH=/bin/touch \
+	TPUT=/usr/bin/tput \
 	TR=/usr/bin/tr \
 	TRACEROUTE=/usr/bin/traceroute \
 	UNAME=/bin/uname \
 	UNIQ=/usr/bin/uniq \
+	UNZIP=/usr/bin/unzip \
 	WC=/usr/bin/wc \
-	ZCAT=/usr/bin/gzip \
+	WGET=/usr/bin/wget \
+	WHOIS=/usr/bin/whois \
+	ZCAT=/bin/zcat \
 	%{nil}
 
 %{__make}
