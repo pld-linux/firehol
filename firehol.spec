@@ -60,8 +60,59 @@ interfaces.
 %setup -q
 
 %build
+# grep AX_NEED_PROG configure.ac |sort -u|sed -rne 's/.+\(\[([^]]+)\], \[([^]]+)\].+/echo \1=`which \2` \\\\/p'|sh
 %configure \
-	TRACEROUTE=/usr/sbin/traceroute
+	BASH_SHELL_PATH=/bin/bash \
+	BRIDGE=/sbin/bridge \
+	CAT=/bin/cat \
+	CHMOD=/bin/chmod \
+	CHOWN=/bin/chown \
+	CP=/bin/cp \
+	CURL=/usr/bin/curl \
+	CUT=/usr/bin/cut \
+	DATE=/bin/date \
+	DIFF=/usr/bin/diff \
+	DIRNAME=/usr/bin/dirname \
+	ENV=/usr/bin/env \
+	EXPR=/usr/bin/expr \
+	FIND=/usr/bin/find \
+	FLOCK=/usr/bin/flock \
+	FOLD=/usr/bin/fold \
+	GAWK=/bin/awk \
+	HEAD=/usr/bin/head \
+	IP=/sbin/ip \
+	IPRANGE=/usr/sbin/iprange \
+	IPSET=/usr/sbin/ipset \
+	LN=/bin/ln \
+	LOGGER=/usr/bin/logger \
+	LS=/bin/ls \
+	LSMOD=/sbin/lsmod \
+	MKDIR=/bin/mkdir \
+	MKTEMP=/bin/mktemp \
+	MODPROBE=/sbin/insmod \
+	MORE=/bin/cat \
+	MV=/bin/mv \
+	PING6=/usr/bin/ping6 \
+	PING=/usr/bin/ping \
+	RM=/bin/rm \
+	RMMOD=/sbin/rmmod \
+	SEQ=/usr/bin/seq \
+	SH=/bin/ksh \
+	SLEEP=/bin/sleep \
+	SORT=/bin/sort \
+	SYSCTL=/sbin/sysctl \
+	TAIL=/usr/bin/tail \
+	TAR=/bin/tar \
+	TC=/sbin/tc \
+	TOUCH=/bin/touch \
+	TR=/usr/bin/tr \
+	TRACEROUTE=/usr/bin/traceroute \
+	UNAME=/bin/uname \
+	UNIQ=/usr/bin/uniq \
+	WC=/usr/bin/wc \
+	ZCAT=/usr/bin/gzip \
+	%{nil}
+
 %{__make}
 
 %install
