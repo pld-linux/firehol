@@ -14,18 +14,10 @@ Source0:	https://firehol.org/download/firehol/releases/v%{version}/%{name}-%{ver
 Source1:	%{name}.service
 Source2:	fireqos.service
 URL:		https://firehol.org/
-BuildRequires:	graphviz
 BuildRequires:	hostname
 BuildRequires:	iprange >= 1.0.2
-BuildRequires:	iproute2
-BuildRequires:	iptables
-BuildRequires:	procps
-BuildRequires:	screen
-BuildRequires:	systemd-devel
 BuildRequires:	tar >= 1:1.22
-BuildRequires:	unzip
 BuildRequires:	wget
-BuildRequires:	whois
 BuildRequires:	xz
 Requires(post,preun):	/sbin/chkconfig
 Requires:	coreutils
